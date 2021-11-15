@@ -72,7 +72,7 @@ namespace ZooLabTests
         public void ShouldFailFeedAnimalByAnimalIsNull(TestConsole console)
         {
             ZooKeeper zooKeeper = new("Ilya", "Krasnoperov", console);
-            var exception = Assert.Throws<ArgumentNullException>(() => zooKeeper.FeedAnimal(null, new Grass(), DateTime.Now));
+            var exception = Assert.Throws<ArgumentNullException>(() => zooKeeper.FeedAnimal(null, new Grass(), Convert.ToDateTime("2005-05-05 17:12 PM")));
             Assert.Equal("animal", exception.ParamName);
             if (console is not null)
             {
@@ -85,7 +85,7 @@ namespace ZooLabTests
         {
             ZooKeeper zooKeeper = new("Ilya", "Krasnoperov", console);
             Penguin penguin = new();
-            zooKeeper.FeedAnimal(penguin, new Grass(), DateTime.Now);
+            zooKeeper.FeedAnimal(penguin, new Grass(), Convert.ToDateTime("2005-05-05 17:12 PM"));
             if (console is not null)
             {
                 Assert.Equal("You have no experience to feed Penguin\n", console.outputMessage);
@@ -99,8 +99,8 @@ namespace ZooLabTests
             zooKeeper.AnimalExperiences.Add("Penguin");
             Penguin penguin = new();
             penguin.FeedSchedule.Add(5);
-            penguin.FeedSchedule.Add(17);
-            zooKeeper.FeedAnimal(penguin, new Grass(), DateTime.Now);
+            penguin.FeedSchedule.Add(16);
+            zooKeeper.FeedAnimal(penguin, new Grass(), Convert.ToDateTime("2005-05-05 17:12 PM"));
             if (console is not null)
             {
                 Assert.Equal("It's not time to feed the Penguin\n", console.outputMessage);
@@ -113,7 +113,7 @@ namespace ZooLabTests
             ZooKeeper zooKeeper = new("Ilya", "Krasnoperov", console);
             zooKeeper.AnimalExperiences.Add("Penguin");
             Penguin penguin = new();
-            var exception = Assert.Throws<ArgumentNullException>(() => zooKeeper.FeedAnimal(penguin, new Grass(), DateTime.Now));
+            var exception = Assert.Throws<ArgumentNullException>(() => zooKeeper.FeedAnimal(penguin, new Grass(), Convert.ToDateTime("2005-05-05 17:12 PM")));
             Assert.Equal("FeedSchedule", exception.ParamName);
             if (console is not null)
             {
